@@ -47,7 +47,7 @@ async def chat_completion(messages: list[dict]) -> str:
                 )
 
     except httpx.HTTPStatusError as e:
-        # Groq returned non-2xx status
+        # Groq returned non-2xx status  
         try:
             body = e.response.json()
             err = body.get("error") or {}
