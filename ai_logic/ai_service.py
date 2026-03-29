@@ -1,11 +1,10 @@
 # ai_logic/ai_service.py
-
-from core.ai_client import chat_completion
+from ai_logic.ai_model import chat_completion
 from ai_logic.memory_storage import query_memory
 
 
-async def run_ai_pipeline(messages: list[dict]) -> str:
-    """Full AI logic including memory + Groq"""
+async def run_ai_pipeline(messages: list[dict], provider: str | None = None) -> str:
+    """Full AI logic including memory + provider call."""
 
     user_question = ""
     for m in reversed(messages):
@@ -23,5 +22,5 @@ async def run_ai_pipeline(messages: list[dict]) -> str:
     ] + messages
 
     # Groq call
-    reply = await chat_completion(final_messages)
+    reply = await chat_completion(final_messages, provider=provider)
     return reply.strip()

@@ -11,8 +11,13 @@ class Settings(BaseSettings):
 
     DATABASE_URL: str
 
+    AI_PROVIDER: str = "grok"
+
     GROQ_API_KEY: str
     GROQ_MODEL: str = "llama-3.1-70b-versatile"
+
+    OPENROUTER_API_KEY: str | None = None
+    OPENROUTER_MODEL: str = "google/gemini-2.0-flash-001"
 
     SERPAPI_KEY: str | None = None
 

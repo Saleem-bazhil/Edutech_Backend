@@ -13,6 +13,7 @@ router = APIRouter(prefix="/chat", tags=["chat"])
 
 @router.post("", response_model=ChatResponse)
 async def chat(req: ChatRequest, db: Session = Depends(get_db)):
+    print("Backend received provider:", req.provider)
 
     if not req.chat_id:
         raise HTTPException(status_code=400, detail="chat_id is required")
@@ -36,7 +37,7 @@ async def chat(req: ChatRequest, db: Session = Depends(get_db)):
     )
 
     # call llm
-    reply = await chat_completion(llm_messages)
+    reply = await chat_completion(llm_messages, provider=req.provider)
 
     now = datetime.utcnow()
     

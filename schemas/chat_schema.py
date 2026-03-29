@@ -10,6 +10,7 @@ class Message(BaseModel):
 class ChatRequest(BaseModel):
     chat_id: Optional[str] = None  
     messages: List[Message]
+    provider: Optional[str] = None
 
 class ChatResponse(BaseModel):
     content: str
